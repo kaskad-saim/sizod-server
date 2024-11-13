@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="dot-eko dot-eko__container">
+
+
+    <div class="current-param">
+      <h1 class="current-param__title">
+        <span class="current-param__title-span">СИЗОД</span>
+        ДОТ ЭКО
+      </h1>
+      <h2 class="current-param__subtitle title-reset">Статус работы линии:
+        <span class="current-param__subtitle-span" id="mode-dot-eko"></span>
+      </h2>
+      <div class="current-param__box">
+        <span class="current-param__date" id="current-date">
+          дата
+        </span>
+        <span class="current-param__time" id="current-time">
+          время
+        </span>
+      </div>
+    </div>
+    <div class="mnemo">
+
+
+
+
+
+      <div class="mnemo__content">
+        <img class="mnemo__img" src="img/true.gif" alt="img">
+        <div class=" mnemo__param mnemo__param-val mnemo__param-val--right-ski">
+          <span class="mnemo__param-text mnemo-right-ski-dot-eko">
+          </span>
+          <span class="mnemo__param-naimenov">шт</span>
+        </div>
+        <div class=" mnemo__param mnemo__param-val mnemo__param-val--left-ski">
+          <span class="mnemo__param-text mnemo-left-ski-dot-eko">
+          </span>
+          <span class="mnemo__param-naimenov">шт</span>
+        </div>
+        <div class=" mnemo__param mnemo__param-val mnemo__param-val--defect">
+          <span class="mnemo__param-text mnemo-defect-dot-eko">
+          </span>
+          <span class="mnemo__param-naimenov">шт</span>
+        </div>
+        <div class=" mnemo__param mnemo__param-val mnemo__param-val--total-ski">
+          <span class="mnemo__param-text mnemo-total-ski-dot-eko">
+          </span>
+          <span class="mnemo__param-naimenov">шт</span>
+        </div>
+
+        <div class="mnemo__param-descr mnemo__param-val--right-ski-text">Лыжа правая</div>
+        <div class="mnemo__param-descr mnemo__param-val--left-ski-text">Лыжа левая</div>
+        <div class="mnemo__param-descr mnemo__param-val--defect-ski-text">Брак</div>
+        <div class="mnemo__param-descr mnemo__param-val--total-ski-text">Сумма</div>
+
+        <div class="mnemo__param-descr mnemo__param-val--control-box-text">Шкаф управления</div>
+        <div class="mnemo__param-descr mnemo__param-val--loading-cases-text">Загрузка корпусов</div>
+        <div class="mnemo__param-descr mnemo__param-val--uz-welding-tampon-text">УЗ приварка тампона</div>
+        <div class="mnemo__param-descr mnemo__param-val--loading-charge-text">Загрузка шихты</div>
+        <div class="mnemo__param-descr mnemo__param-val--loading-covers-text">Загрузка крышек</div>
+        <div class="mnemo__param-descr mnemo__param-val--uz-welding-lid-text">УЗ приварка крышки</div>
+        <div class="mnemo__param-descr mnemo__param-val--manipulator-text">Манип-р</div>
+
+
+
+
+
+
+
+        <div class="mnemo__param-box--btns">
+          <button class="mnemo__param-box--btn modal-btn btn-reset" id="dot-eko-hour-report-btn"
+            data-modal-target="dot-eko-hour-report">
+            Часовой отчет
+          </button>
+          <button class="mnemo__param-box--btn modal-btn btn-reset" id="dot-eko-month-report-btn"
+            data-modal-target="dot-eko-month-report">
+            Месячный отчет
+          </button>
+          <button class="mnemo__param-box--btn modal-btn btn-reset" id="dot-eko-hour-graph-btn"
+            data-modal-target="dot-eko-hour-graph">
+            Суточный график
+          </button>
+          <button class="mnemo__param-box--btn modal-btn btn-reset" id="dot-eko-month-graph-btn"
+            data-modal-target="dot-eko-month-graph">
+            Месячный график
+          </button>
+        </div>
+
+      </div>
+
+      <div class="tables">
+        <table class="table">
+          <caption class="table__title">Текущие параметры
+          </caption>
+          <thead class="table__thead">
+            <tr class="table__tr">
+              <th class="table__th table__left">Наименование параметра</th>
+              <th class="table__th ">Значения</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table__tr">
+              <td class="table__td table__left">Лыжа левая</td>
+              <td class="table__td table__right" id="left-ski-dot-eko">
+              </td>
+            </tr>
+            <tr class="table__tr">
+              <td class="table__td table__left">Лыжа правая</td>
+              <td class="table__td table__right" id="right-ski-dot-eko">
+              </td>
+            </tr>
+            <tr class="table__tr">
+              <td class="table__td table__left">Сумма двух лыж</td>
+              <td class="table__td table__right" id="total-ski-dot-eko">
+              </td>
+            </tr>
+            <tr class="table__tr">
+              <td class="table__td table__left">Брак</td>
+              <td class="table__td table__right" id="defect-dot-eko">
+              </td>
+            </tr>
+            <tr class="table__tr">
+              <td class="table__td table__left">Время работы</td>
+              <td class="table__td table__right" id="shift-time-dot-eko">
+              </td>
+            </tr>
+            <tr class="table__tr for-raport">
+              <td class="table__td table__left">Лыжа левая рапорт</td>
+              <td class="table__td table__right" id="left-ski-report-dot-eko">
+              </td>
+            </tr>
+            <tr class="table__tr for-raport">
+              <td class="table__td table__left">Лыжа правая рапорт</td>
+              <td class="table__td table__right" id="right-ski-report-dot-eko">
+              </td>
+            </tr>
+            <tr class="table__tr for-raport">
+              <td class="table__td table__left">Сумма двух лыж рапорт</td>
+              <td class="table__td table__right" id="total-ski-report-dot-eko">
+              </td>
+            </tr>
+            <tr class="table__tr for-raport">
+              <td class="table__td table__left">Брак рапорт</td>
+              <td class="table__td table__right" id="defect-report-dot-eko">
+              </td>
+            </tr>
+            <tr class="table__tr for-raport">
+              <td class="table__td table__left">Время работы рапорт</td>
+              <td class="table__td table__right" id="work-time-dot-eko">
+              </td>
+            </tr>
+            <!-- <tr class="table__tr">
+              <td class="table__td table__left">Статус работы</td>
+              <td class="table__td table__right" id="mode-dot-eko">
+              </td>
+            </tr> -->
+            <tr class="table__tr">
+              <td class="table__td table__left">Время записи на сервер</td>
+              <td class="table__td table__right" id="last-updated-dot-eko">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="mnemo__modal-background modal-js" id="dot-eko-hour-report">
+    <div class="mnemo__modal-active">
+      <div class="mnemo__modal-title">
+        <h2 class="mnemo__modal-title-text title-reset">Отчет за сутки</h2>
+        <button class="mnemo__modal-close btn-reset">
+          <svg class="mnemo__modal-btn-close-svg" width="30px" height="30px" viewBox="0 0 32 32">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+              <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-568.000000, -1087.000000)" fill="green">
+                <path
+                  d="M584,1117 C576.268,1117 570,1110.73 570,1103 C570,1095.27 576.268,1089 584,1089 C591.732,1089 598,1095.27 598,1103 C598,1110.73 591.732,1117 584,1117 L584,1117 Z M584,1087 C575.163,1087 568,1094.16 568,1103 C568,1111.84 575.163,1119 584,1119 C592.837,1119 600,1111.84 600,1103 C600,1094.16 592.837,1087 584,1087 L584,1087 Z M589.717,1097.28 C589.323,1096.89 588.686,1096.89 588.292,1097.28 L583.994,1101.58 L579.758,1097.34 C579.367,1096.95 578.733,1096.95 578.344,1097.34 C577.953,1097.73 577.953,1098.37 578.344,1098.76 L582.58,1102.99 L578.314,1107.26 C577.921,1107.65 577.921,1108.29 578.314,1108.69 C578.708,1109.08 579.346,1109.08 579.74,1108.69 L584.006,1104.42 L588.242,1108.66 C588.633,1109.05 589.267,1109.05 589.657,1108.66 C590.048,1108.27 590.048,1107.63 589.657,1107.24 L585.42,1103.01 L589.717,1098.71 C590.11,1098.31 590.11,1097.68 589.717,1097.28 L589.717,1097.28 Z"
+                  id="cross-circle" sketch:type="MSShapeGroup">
+                </path>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <div class="mnemo__modal-report " id="modal-report-content-hour"></div>
+      <div class="overlay overlay-hour-report">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+  <div class="mnemo__modal-background modal-js" id="dot-eko-month-report">
+    <div class="mnemo__modal-active">
+      <div class="mnemo__modal-title">
+        <h2 class="mnemo__modal-title-text title-reset">Отчет за месяц</h2>
+        <button class="mnemo__modal-close btn-reset">
+          <svg class="mnemo__modal-btn-close-svg" width="30px" height="30px" viewBox="0 0 32 32">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+              <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-568.000000, -1087.000000)" fill="green">
+                <path
+                  d="M584,1117 C576.268,1117 570,1110.73 570,1103 C570,1095.27 576.268,1089 584,1089 C591.732,1089 598,1095.27 598,1103 C598,1110.73 591.732,1117 584,1117 L584,1117 Z M584,1087 C575.163,1087 568,1094.16 568,1103 C568,1111.84 575.163,1119 584,1119 C592.837,1119 600,1111.84 600,1103 C600,1094.16 592.837,1087 584,1087 L584,1087 Z M589.717,1097.28 C589.323,1096.89 588.686,1096.89 588.292,1097.28 L583.994,1101.58 L579.758,1097.34 C579.367,1096.95 578.733,1096.95 578.344,1097.34 C577.953,1097.73 577.953,1098.37 578.344,1098.76 L582.58,1102.99 L578.314,1107.26 C577.921,1107.65 577.921,1108.29 578.314,1108.69 C578.708,1109.08 579.346,1109.08 579.74,1108.69 L584.006,1104.42 L588.242,1108.66 C588.633,1109.05 589.267,1109.05 589.657,1108.66 C590.048,1108.27 590.048,1107.63 589.657,1107.24 L585.42,1103.01 L589.717,1098.71 C590.11,1098.31 590.11,1097.68 589.717,1097.28 L589.717,1097.28 Z"
+                  id="cross-circle" sketch:type="MSShapeGroup">
+                </path>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <div class="mnemo__modal-report" id="modal-report-content-month"></div>
+      <div class="overlay overlay-month-report">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+  <div class="mnemo__modal-background modal-js" id="dot-eko-hour-graph">
+    <div class="mnemo__modal-active">
+      <div class="mnemo__modal-title">
+        <h2 class="mnemo__modal-title-text title-reset">График за сутки</h2>
+        <button class="mnemo__modal-close btn-reset">
+          <svg class="mnemo__modal-btn-close-svg" width="30px" height="30px" viewBox="0 0 32 32">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+              <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-568.000000, -1087.000000)" fill="green">
+                <path
+                  d="M584,1117 C576.268,1117 570,1110.73 570,1103 C570,1095.27 576.268,1089 584,1089 C591.732,1089 598,1095.27 598,1103 C598,1110.73 591.732,1117 584,1117 L584,1117 Z M584,1087 C575.163,1087 568,1094.16 568,1103 C568,1111.84 575.163,1119 584,1119 C592.837,1119 600,1111.84 600,1103 C600,1094.16 592.837,1087 584,1087 L584,1087 Z M589.717,1097.28 C589.323,1096.89 588.686,1096.89 588.292,1097.28 L583.994,1101.58 L579.758,1097.34 C579.367,1096.95 578.733,1096.95 578.344,1097.34 C577.953,1097.73 577.953,1098.37 578.344,1098.76 L582.58,1102.99 L578.314,1107.26 C577.921,1107.65 577.921,1108.29 578.314,1108.69 C578.708,1109.08 579.346,1109.08 579.74,1108.69 L584.006,1104.42 L588.242,1108.66 C588.633,1109.05 589.267,1109.05 589.657,1108.66 C590.048,1108.27 590.048,1107.63 589.657,1107.24 L585.42,1103.01 L589.717,1098.71 C590.11,1098.31 590.11,1097.68 589.717,1097.28 L589.717,1097.28 Z"
+                  id="cross-circle" sketch:type="MSShapeGroup">
+                </path>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <div class="mnemo__modal-report" id="modal-graph-content-hour">
+        <canvas id="hourly-graph-canvas"></canvas> <!-- Canvas для рендеринга графика -->
+      </div>
+      <div class="overlay overlay-hour-graph">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+  <div class="mnemo__modal-background modal-js" id="dot-eko-month-graph">
+    <div class="mnemo__modal-active">
+      <div class="mnemo__modal-title">
+        <h2 class="mnemo__modal-title-text title-reset">График за месяц</h2>
+        <button class="mnemo__modal-close btn-reset">
+          <svg class="mnemo__modal-btn-close-svg" width="30px" height="30px" viewBox="0 0 32 32">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+              <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-568.000000, -1087.000000)" fill="green">
+                <path
+                  d="M584,1117 C576.268,1117 570,1110.73 570,1103 C570,1095.27 576.268,1089 584,1089 C591.732,1089 598,1095.27 598,1103 C598,1110.73 591.732,1117 584,1117 L584,1117 Z M584,1087 C575.163,1087 568,1094.16 568,1103 C568,1111.84 575.163,1119 584,1119 C592.837,1119 600,1111.84 600,1103 C600,1094.16 592.837,1087 584,1087 L584,1087 Z M589.717,1097.28 C589.323,1096.89 588.686,1096.89 588.292,1097.28 L583.994,1101.58 L579.758,1097.34 C579.367,1096.95 578.733,1096.95 578.344,1097.34 C577.953,1097.73 577.953,1098.37 578.344,1098.76 L582.58,1102.99 L578.314,1107.26 C577.921,1107.65 577.921,1108.29 578.314,1108.69 C578.708,1109.08 579.346,1109.08 579.74,1108.69 L584.006,1104.42 L588.242,1108.66 C588.633,1109.05 589.267,1109.05 589.657,1108.66 C590.048,1108.27 590.048,1107.63 589.657,1107.24 L585.42,1103.01 L589.717,1098.71 C590.11,1098.31 590.11,1097.68 589.717,1097.28 L589.717,1097.28 Z"
+                  id="cross-circle" sketch:type="MSShapeGroup">
+                </path>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <div class="mnemo__modal-report" id="modal-graph-content-month">
+        <canvas id="monthly-graph-canvas"></canvas> <!-- Canvas для рендеринга графика -->
+      </div>
+      <div class="overlay overlay-month-graph">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/libs/moment.js"></script>
+  <script src="./js/libs/chart.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
