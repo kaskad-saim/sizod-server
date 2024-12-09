@@ -9,14 +9,14 @@ app.use(express.static('public'));
 
 const startServer = async () => {
   const dotEkoCollection = await connectToDotEkoDb();
-  const dotProCollection = await connectToDotProDb();
+  // const dotProCollection = await connectToDotProDb();
 
   // Установка маршрутов для DOT-EKO и DOT-PRO с отдельными маршрутами для API
-  app.use('/api', apiRoutes(dotEkoCollection, dotProCollection));
+  app.use('/api', apiRoutes(dotEkoCollection));
 
   // Запуск сервисов Modbus для DOT-EKO и DOT-PRO
   readData(dotEkoCollection);
-  readDataDotPro(dotProCollection);
+  // readDataDotPro(dotProCollection);
 
   app.listen(3002, () => {
     console.log('Сервер работает на http://localhost:3002');
