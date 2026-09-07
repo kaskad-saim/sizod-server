@@ -1,0 +1,38 @@
+@use '@/app/styles/mixins' as mixins;
+@use '@/app/styles/variables' as vars;
+
+.require-sso-auth {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  background: linear-gradient(165deg, vars.$surface-subtle 0%, vars.$surface-elevated 42%, vars.$surface-hover 100%);
+}
+
+.require-sso-auth__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 360px;
+  width: 100%;
+  padding: 32px 28px;
+  border-radius: 12px;
+  background-color: vars.$surface-elevated;
+  box-shadow: 0 8px 32px var(--shadow-soft);
+  border: 1px solid vars.$border-default;
+}
+
+.require-sso-auth__title {
+  margin: 0;
+  text-align: center;
+  @include mixins.text-style(18px, 24px, 600, vars.$carbon);
+}
+
+.require-sso-auth__sub {
+  margin: -8px 0 0;
+  text-align: center;
+  @include mixins.text-style(14px, 20px, 400, vars.$text-muted);
+}

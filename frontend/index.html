@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sizod Server</title>
+    <script>
+      (() => {
+        const THEME_STORAGE_KEY = 'app_theme';
+        const THEME_ATTRIBUTE = 'data-theme';
+        const isTheme = (value) => value === 'light' || value === 'dark';
+        const isThemePreference = (value) => isTheme(value) || value === 'system';
+        const isEmbedded = () => {
+          try {
+            return window.self !== window.top;
+          } catch {
+            return true;
+          }
+        };
+
+        let initialTheme = 'light';
+        if (isEmbedded()) {
+          const queryTheme = new URLSearchParams(window.location.search).get('theme');
+          if (isTheme(queryTheme)) {
+            initialTheme = queryTheme;
+          }
+        } else {
+          let storedPreference = null;
+          try {
+            const raw = window.localStorage.getItem(THEME_STORAGE_KEY);
+            storedPreference = isThemePreference(raw) ? raw : null;
+          } catch {
+            storedPreference = null;
+          }
+          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          initialTheme = isTheme(storedPreference)
+            ? storedPreference
+            : storedPreference === 'system'
+              ? systemTheme
+              : 'light';
+        }
+
+        document.documentElement.setAttribute(THEME_ATTRIBUTE, initialTheme);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

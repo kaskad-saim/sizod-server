@@ -1,0 +1,14 @@
+**/node_modules
+dist/
+**/dist/
+frontend/dist
+**/coverage/**
+**/build
+**/backups/**
+**/monitoringStateCache.json
+**/logs/**
+.git
+**/*.min.js
+**/package-lock.json
+pnpm-lock.yaml
+yarn.lock

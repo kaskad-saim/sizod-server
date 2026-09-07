@@ -1,0 +1,67 @@
+@use '@app/styles/mixins' as mixins;
+@use '@app/styles/variables' as vars;
+
+.home {
+  background-color: vars.$white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 8px var(--shadow-medium);
+  overflow: visible;
+
+  &__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: vars.$space-md;
+    padding-right: vars.$space-sm;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-bottom: 1px solid var(--border-default);
+    background: linear-gradient(180deg, vars.$surface-elevated 0%, vars.$surface-subtle 100%);
+  }
+
+  &__primary-tabs {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  &__subtabs-row {
+    display: flex;
+    align-items: center;
+    gap: vars.$space-md;
+    padding: 2px vars.$space-lg 0;
+    border-bottom: 1px solid var(--border-default);
+    background: linear-gradient(180deg, vars.$surface-subtle 0%, vars.$surface-accent-subtle 100%);
+  }
+
+  &__subtabs {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  &__chart-select {
+    flex: 0 0 auto;
+    width: 240px;
+    max-width: 100%;
+  }
+
+  &__content {
+    background-color: vars.$white;
+    margin: vars.$space-md;
+    padding-bottom: vars.$space-md;
+    transition: height 0.3s ease-in-out;
+  }
+
+  @include mixins.mq(vars.$bp-1280) {
+    &__subtabs-row {
+      padding: 2px vars.$space-sm 0;
+    }
+
+    &__chart-select {
+      width: 200px;
+    }
+
+    &__content {
+      margin: vars.$space-sm;
+      padding-bottom: vars.$space-sm;
+    }
+  }
+}

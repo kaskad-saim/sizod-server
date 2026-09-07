@@ -1,0 +1,34 @@
+.animated-content {
+  overflow: hidden;
+  transition: height 0.5s ease-in-out;
+  will-change: height;
+
+  &[data-height-animation='off'] {
+    transition: none;
+  }
+
+  &__body {
+    width: 100%;
+    animation: animated-content-reveal 0.5s ease-in-out both;
+  }
+}
+
+@keyframes animated-content-reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-content {
+    transition: none;
+
+    &__body {
+      animation: none;
+    }
+  }
+}

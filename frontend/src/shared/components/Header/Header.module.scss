@@ -1,0 +1,40 @@
+@use '../../../app/styles/mixins' as mixins;
+@use '../../../app/styles/variables' as vars;
+
+.header {
+  background-color: vars.$white-smoke;
+  border: 1px solid vars.$hulk;
+  box-shadow: 0 4px 6px var(--shadow-medium);
+  border-radius: 0;
+  margin-bottom: 10px;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    text-align: center;
+    @include mixins.text-style(24px, 30px, 700, vars.$hulk);
+  }
+
+  &__brand {
+    @include mixins.text-style(22px, 30px, 600, vars.$black);
+  }
+
+  &__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@include mixins.mq(vars.$bp-1280) {
+  .header {
+    &__title {
+      @include mixins.text-style(18px, 22px, 700);
+    }
+
+    &__brand {
+      @include mixins.text-style(16px, 22px, 600);
+    }
+  }
+}

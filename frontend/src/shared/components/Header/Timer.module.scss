@@ -1,0 +1,19 @@
+@use '@app/styles/mixins' as mixins;
+@use '@app/styles/variables' as vars;
+
+.timer {
+  &__date,
+  &__time {
+    margin-right: 20px;
+    @include mixins.text-style(22px, 30px, 600, vars.$black);
+  }
+}
+
+@include mixins.mq(vars.$bp-1280) {
+  .timer {
+    &__date,
+    &__time {
+      @include mixins.text-style(16px, 22px, 600);
+    }
+  }
+}

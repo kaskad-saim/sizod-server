@@ -1,0 +1,18 @@
+@use '@sorbent/ui-kit/styles/global';
+@use '@sorbent/ui-kit/styles/tokens' as tokens;
+@use '@sorbent/ui-kit/styles/scrollbars' as scrollbars;
+@use '@sorbent/ui-kit/styles/tables' as tables;
+@use 'project-tokens';
+
+@include tokens.theme-vars(project-tokens.$light, project-tokens.$dark);
+
+html {
+  @include scrollbars.scrollbar-page;
+}
+
+body {
+  padding: 10px 20px;
+  @include scrollbars.scrollbar-page;
+}
+
+@include tables.table-classes;

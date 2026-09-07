@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2023",
+    "useDefineForClassFields": true,
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@app/*": ["./src/app/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@features/*": ["./src/features/*"],
+      "react": ["./node_modules/@types/react"],
+      "react/*": ["./node_modules/@types/react/*"],
+      "react-dom": ["./node_modules/@types/react-dom"],
+      "react-dom/*": ["./node_modules/@types/react-dom/*"],
+      "@mui/material": ["./node_modules/@mui/material"],
+      "@mui/material/*": ["./node_modules/@mui/material/*"],
+      "@emotion/react": ["./node_modules/@emotion/react"],
+      "@emotion/styled": ["./node_modules/@emotion/styled"],
+      "chart.js": ["./node_modules/chart.js"],
+      "chart.js/*": ["./node_modules/chart.js/*"],
+      "chartjs-adapter-date-fns": ["./node_modules/chartjs-adapter-date-fns"],
+      "chartjs-plugin-annotation": ["./node_modules/chartjs-plugin-annotation"],
+      "chartjs-plugin-crosshair": ["./node_modules/chartjs-plugin-crosshair"]
+    },
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}

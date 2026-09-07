@@ -1,0 +1,7 @@
+$light: (
+  'sizod-loading-overlay-bg': color-mix(in srgb, var(--surface-elevated) 88%, transparent),
+);
+
+$dark: (
+  'sizod-loading-overlay-bg': color-mix(in srgb, var(--surface-elevated) 80%, transparent),
+);
