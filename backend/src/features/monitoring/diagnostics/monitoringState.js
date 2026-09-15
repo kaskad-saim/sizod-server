@@ -1,8 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { MODBUS_POLLING_DEVICES } from '#features/monitoring/data/config/polling/index.js';
-import { getConverterMetaByPort } from '#features/monitoring/diagnostics/convertersConfig.js';
-import { createMonitoringState } from '@sorbent/platform-kit/modbus';
+import { OPCUA_ENDPOINTS, OPCUA_POLLING_DEVICES } from '#features/monitoring/data/config/polling/index.js';
+import { createMonitoringState } from '@sorbent/platform-kit/monitoring';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -11,22 +10,24 @@ const monitoring = createMonitoringState({
   cacheFilePath: path.join(__dirname, 'monitoringStateCache.json'),
 });
 
+// устройство в дереве мониторинга: ПЛК на месте преобразователя, OPC UA на месте порта
 function withMonitoringMeta(device) {
-  const converter = getConverterMetaByPort(device?.port);
+  const endpoint = OPCUA_ENDPOINTS[device.endpoint];
+  const host = endpoint ? new URL(endpoint.endpointUrl).hostname : device.endpoint;
   return {
     ...device,
-    monitoringId: device?.monitoringId ?? device?.deviceID ?? device?.address,
-    monitoringDisplayName: device?.monitoringDisplayName ?? device?.name,
-    converterId: device?.converterId ?? device?.converterIp ?? converter?.ipAddress,
-    converterIp: device?.converterIp ?? converter?.ipAddress,
-    converterDisplayName:
-      device?.converterDisplayName ?? device?.converterName ?? converter?.controllerName ?? converter?.name,
-    converterPort: device?.converterPort ?? converter?.rs485Port,
+    monitoringId: device.monitoringId ?? device.configId,
+    monitoringDisplayName: device.monitoringDisplayName ?? device.name,
+    converterId: device.endpoint,
+    converterIp: host,
+    converterDisplayName: endpoint?.displayName ?? host,
+    portId: 'opcua',
+    portDisplayName: 'OPC UA',
   };
 }
 
 export function initializeMonitoringState() {
-  monitoring.initialize(MODBUS_POLLING_DEVICES.map(withMonitoringMeta));
+  monitoring.initialize(OPCUA_POLLING_DEVICES.map(withMonitoringMeta));
 }
 
 export function markDeviceSuccess(device) {
@@ -34,8 +35,7 @@ export function markDeviceSuccess(device) {
 }
 
 export function markDeviceError(device, error) {
-  void error;
-  monitoring.markError(withMonitoringMeta(device));
+  monitoring.markError(withMonitoringMeta(device), error);
 }
 
 export function getMonitoringTree() {

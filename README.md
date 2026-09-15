@@ -1,18 +1,18 @@
 # Сервер СИЗОД (sizod-server)
 
-Монорепозиторий для сбора данных с оборудования цеха СИЗОД по **Modbus**, записи в MongoDB и визуализации во фронтенде. 
+Монорепозиторий для сбора данных с ПЛК цеха СИЗОД по **OPC UA**, записи в MongoDB и визуализации во фронтенде.
 
-- **`backend/`** — Express (ESM), Mongoose, опрос Modbus через `@sorbent/platform-kit/modbus` (по одному worker'у на COM-порт, в development симулятор), объектные конфиги устройств, диагностика (дерево доступности и время ответа slave), логирование Winston, **SSO** с главным сервером (`new-main-server`), раздача собранного SPA.
+- **`backend/`** — Express (ESM), Mongoose, опрос ПЛК на CODESYS по OPC UA через `@sorbent/platform-kit/opcua` (по одному worker'у на ПЛК, в development симулятор), объектные конфиги устройств, диагностика (дерево доступности), логирование Winston, **SSO** с главным сервером (`new-main-server`), раздача собранного SPA.
 - **`frontend/`** — React 19 + TypeScript + Vite, `@sorbent/ui-kit`, MUI, SCSS.
 
-Сейчас в репозитории описано одно устройство-заготовка `example` (`backend/src/features/monitoring/data/config/devices/example`). Его нужно заменить реальными приборами: см. README в каталоге `devices`.
+Сейчас описана Станция 16 (`station16`, ОВЕН ПЛК210, `opc.tcp://169.254.0.238:4840`). Как добавлять ПЛК: README в каталоге `backend/src/features/monitoring/data/config/devices`.
 
 ## Возможности
 
-- Опрос Modbus-устройств из `backend/src/features/monitoring/data/config/polling` отдельным worker'ом на каждый COM-порт (в development `ModbusSimulator`, в production `ModbusClient`). Карты регистров, преобразования и единицы описаны конфигами в `backend/src/features/monitoring/data/config/devices`.
+- Опрос ПЛК из `backend/src/features/monitoring/data/config/polling/opcua` отдельным worker'ом на каждый ПЛК (в development `OpcUaSimulator`, в production `OpcUaClient`). Переменные, названия и преобразования описаны конфигами в `backend/src/features/monitoring/data/config/devices`.
 - REST API текущих данных (`/api/<deviceId>-data`) и истории для графиков (`/api/:deviceId/data`).
-- **`GET /api/monitoring/status`** — дерево состояния устройств, портов и конвертеров (`schemaVersion: 2`, `converter -> port -> device`); состояние кэшируется в `monitoringStateCache.json` (в `.gitignore`).
-- **`GET /api/monitoring/modbus-timings`** — время ответа каждого slave за скользящее окно 6 часов и рекомендация по `requestTimeoutMs`.
+- **`GET /api/monitoring/status`** — дерево состояния устройств (`schemaVersion: 2`, `ПЛК -> OPC UA -> устройство`); состояние кэшируется в `monitoringStateCache.json` (в `.gitignore`).
+- **`npm run opcua:check`** — сверка конфигов устройств с переменными живых ПЛК.
 - **SSO** с главным приложением через `@sorbent/platform-kit/sso`, клиент по умолчанию **`sizod`**.
 - **`GET /config.js`** — отдаёт `window.NODE_ENV` для встраиваемых сценариев, **`GET /api/server-time`** — время сервера в ISO.
 
@@ -24,15 +24,16 @@ sizod-server/
 │  ├─ src/
 │  │  ├─ server.js             # подключение DB, диагностика, запуск опроса, listen, graceful shutdown
 │  │  ├─ app.js                # Express: CORS, CSP, маршруты, SPA fallback
-│  │  ├─ startup/              # запуск опроса Modbus (склейка конфигов, platform-kit и диагностики)
+│  │  ├─ startup/              # запуск опроса OPC UA (склейка конфигов, platform-kit и диагностики)
 │  │  ├─ features/
-│  │  │  ├─ monitoring/data/         # конфиги устройств и портов, модели телеметрии, маршруты данных и графиков
-│  │  │  ├─ monitoring/diagnostics/  # дерево доступности устройств, конвертеры, /api/monitoring/*
+│  │  │  ├─ monitoring/data/         # конфиги устройств и ПЛК, модели телеметрии, маршруты данных и графиков
+│  │  │  ├─ monitoring/diagnostics/  # дерево доступности устройств, /api/monitoring/*
 │  │  │  └─ platform/auth/           # настройка SSO-клиента
 │  │  ├─ models/database.js    # подключение к MongoDB
 │  │  ├─ infrastructure/       # логгер, менеджер соединений Mongo
 │  │  └─ configs/env.js, constants/baseUrls.js
-│  ├─ test/                    # node --test: конфиги, план чтения, симулятор, маршруты, модели
+│  ├─ scripts/checkOpcUaDevices.js  # npm run opcua:check
+│  ├─ test/                    # node --test: конфиги, опрос через симулятор, маршруты, модели
 │  └─ package.json
 ├─ frontend/
 │  ├─ src/                     # app, pages, shared, features/platform/sso-auth
@@ -58,7 +59,7 @@ cd ../frontend && npm install
 
 Файл **`backend/.env`** (`.gitignore` скрывает `**/.env`).
 
-- **`NODE_ENV`** — в `production` используется `ModbusClient` и реальные COM-порты, в любом другом режиме `ModbusSimulator`.
+- **`NODE_ENV`** — в `production` используется `OpcUaClient` и реальные ПЛК, в любом другом режиме `OpcUaSimulator`.
 - **`PORT`** — порт HTTP, по умолчанию `3002`.
 - **`EMBED_ALLOWED_ORIGINS`** — список origin через запятую для заголовка **Content-Security-Policy** `frame-ancestors` (iframe). `cors()` подключён без фильтра по origin.
 - **`MAIN_AUTH_ENABLED`** — `true` или `false`. Если не задана: в production главная авторизация включена, в development выключена.
@@ -110,6 +111,8 @@ cd frontend && npm run build:deploy
 
 `build:deploy` прогоняет lint и `tsc`, собирает приложение в `dist-next`, сохраняет текущую сборку в `dist-old` и только затем подменяет **`frontend/dist`**. Затем запуск backend с `NODE_ENV=production`; статика отдаётся из **`frontend/dist`**, остальные запросы получают **`index.html`** (SPA).
 
+С сервера должен быть доступен порт 4840 каждого ПЛК. Перед выкладкой и после изменения проекта ПЛК: `cd backend && npm run opcua:check`.
+
 ## MongoDB
 
 URI зашит в `backend/src/models/database.js`: `mongodb://127.0.0.1:27017/sizod`.
@@ -126,9 +129,9 @@ URI зашит в `backend/src/models/database.js`: `mongodb://127.0.0.1:27017/s
 ## Основные маршруты API
 
 - `/api/auth/*` — SSO: callback, refresh, popup-complete и остальные эндпоинты потока.
-- `/api/example-data` — текущие данные устройства-заготовки (`features/monitoring/data/routes/deviceDataRoutes.js`); при устаревании данных старше 60 с вместо значений отдаются прочерки.
+- `/api/station16-data` — текущие данные Станции 16 (`features/monitoring/data/routes/deviceDataRoutes.js`); при устаревании данных старше 60 с вместо значений отдаются прочерки.
 - `/api/:deviceId/data?start&end` — история для графиков по любому описанному устройству.
-- `/api/monitoring/status`, `/api/monitoring/modbus-timings` — диагностика.
+- `/api/monitoring/status` — диагностика.
 - `/api/server-time` — время сервера (ISO).
 
 ## Интеграция с главным сервером
@@ -139,6 +142,6 @@ URI зашит в `backend/src/models/database.js`: `mongodb://127.0.0.1:27017/s
 
 В **корне**: `npm run dev`, `npm run dev:backend`, `npm run dev:frontend`.
 
-В каталоге **`backend`**: `npm run dev` (nodemon), `npm start`, `npm test` (без железа и без MongoDB), `npm run format`, `npm run format:check`.
+В каталоге **`backend`**: `npm run dev` (nodemon), `npm start`, `npm test` (без ПЛК и без MongoDB), `npm run opcua:check` (нужна сеть до ПЛК), `npm run format`, `npm run format:check`.
 
 В каталоге **`frontend`**: `npm run dev`, `npm run build`, `npm run build:deploy`, `npm run preview`, `npm run lint`, `npm run format`, `npm run format:check`.

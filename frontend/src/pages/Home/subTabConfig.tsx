@@ -10,5 +10,5 @@ export interface SubtabItem {
 const CURRENT_ICON = <TuneRounded fontSize="inherit" />;
 
 export const subtabsConfig: Record<string, SubtabItem[]> = {
-  example: [{ label: 'Параметры', value: 'current', icon: CURRENT_ICON }],
+  station16: [{ label: 'Параметры', value: 'current', icon: CURRENT_ICON }],
 };

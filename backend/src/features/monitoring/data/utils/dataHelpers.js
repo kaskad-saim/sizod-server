@@ -1,4 +1,4 @@
-import { DEFAULT_STALE_AFTER_MS, deviceStateStore } from '@sorbent/platform-kit/modbus';
+import { DEFAULT_STALE_AFTER_MS, deviceStateStore } from '@sorbent/platform-kit/device';
 
 export const DATA_STALE_MS = DEFAULT_STALE_AFTER_MS;
 

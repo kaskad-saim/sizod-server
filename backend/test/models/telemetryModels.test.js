@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { ExampleModel, TELEMETRY_MODELS } from '#features/monitoring/data/models/telemetryModels.js';
+import { Station16Model, TELEMETRY_MODELS } from '#features/monitoring/data/models/telemetryModels.js';
 
 // имя модели -> MongoDB-коллекция; список фиксирует, что рефакторинг не меняет хранилище
 const EXPECTED_COLLECTIONS = {
-  exampleModel: 'examplemodels',
+  station16Model: 'station16models',
 };
 
 test('реестр телеметрии содержит все модели с ожидаемыми MongoDB-коллекциями', () => {
@@ -26,15 +26,15 @@ test('история не удаляется автоматически: инд�
 });
 
 test('типовая телеметрическая модель сохраняет любые секции из конфига без описания в схеме', () => {
-  const doc = new ExampleModel({
-    parameters: { Температура: 25.3 },
-    info: { Работа: true },
+  const doc = new Station16Model({
+    process: { Давление: 12.5 },
+    inputs: { 'Аварийный стоп': false },
     lastUpdated: new Date(),
   });
 
   assert.equal(doc.validateSync(), undefined);
 
   const plain = doc.toObject();
-  assert.deepEqual(plain.parameters, { Температура: 25.3 });
-  assert.deepEqual(plain.info, { Работа: true });
+  assert.deepEqual(plain.process, { Давление: 12.5 });
+  assert.deepEqual(plain.inputs, { 'Аварийный стоп': false });
 });

@@ -6,7 +6,7 @@ import styles from './HomePage.module.scss';
 import { shouldBypassSsoInEmbed } from '@features/platform/sso-auth';
 import { ThemeModeToggle } from '@shared/theme';
 
-const PRIMARY_TABS = [{ value: 'example', label: 'Пример устройства' }];
+const PRIMARY_TABS = [{ value: 'station16', label: 'Станция 16' }];
 const DEFAULT_TAB = PRIMARY_TABS[0].value;
 
 const HomePage = () => {

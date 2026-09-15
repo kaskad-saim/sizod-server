@@ -4,7 +4,7 @@ import app from '#app.js';
 import { connectDB } from '#models/database.js';
 import { SERVER_BASE_URL } from '#constants/baseUrls.js';
 import { initializeMonitoringState } from '#features/monitoring/diagnostics/monitoringState.js';
-import { startModbusPolling, stopModbusPolling } from '#startup/modbusPolling.js';
+import { startOpcUaPolling, stopOpcUaPolling } from '#startup/opcUaPolling.js';
 
 const port = process.env.PORT || 3002;
 const FORCE_EXIT_MS = 35_000;
@@ -12,7 +12,7 @@ const FORCE_EXIT_MS = 35_000;
 void connectDB();
 initializeMonitoringState();
 
-void startModbusPolling();
+startOpcUaPolling();
 
 const httpServer = app.listen(port, () => {
   const host = process.env.NODE_ENV === 'production' ? new URL(SERVER_BASE_URL).hostname : 'localhost';
@@ -29,7 +29,7 @@ const shutdown = async (signal) => {
   const forceExitTimer = setTimeout(() => process.exit(1), FORCE_EXIT_MS);
   forceExitTimer.unref();
 
-  await stopModbusPolling();
+  await stopOpcUaPolling();
 
   httpServer.close(() => {
     clearTimeout(forceExitTimer);

@@ -4,7 +4,7 @@ import { createFieldsDataHandler } from '#features/monitoring/data/utils/routeHe
 
 const router = express.Router();
 
-export const DEVICE_DATA_ENDPOINTS = Object.freeze([{ path: '/example-data', deviceId: 'example' }]);
+export const DEVICE_DATA_ENDPOINTS = Object.freeze([{ path: '/station16-data', deviceId: 'station16' }]);
 
 export const getDeviceDataEndpointConfig = ({ deviceId }) => {
   const config = getDeviceConfig(deviceId);

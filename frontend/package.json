@@ -18,7 +18,7 @@
     "@mui/icons-material": "^7.3.9",
     "@mui/material": "^7.3.9",
     "@mui/x-date-pickers": "^8.27.2",
-    "@sorbent/platform-kit": "github:kaskad-saim/platform-kit#semver:^0.3.0",
+    "@sorbent/platform-kit": "github:kaskad-saim/platform-kit#semver:^0.7.0",
     "@sorbent/ui-kit": "github:kaskad-saim/ui-kit#semver:^2.0.0",
     "chart.js": "^4.5.1",
     "chartjs-adapter-date-fns": "^3.0.0",

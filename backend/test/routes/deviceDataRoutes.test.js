@@ -6,7 +6,7 @@ import deviceDataRoutes, {
 } from '#features/monitoring/data/routes/deviceDataRoutes.js';
 import { buildFieldsStaleResponse } from '#features/monitoring/data/utils/routeHelpers.js';
 
-const EXPECTED_PATHS = ['/example-data'];
+const EXPECTED_PATHS = ['/station16-data'];
 
 test('единый роутер регистрирует URL данных устройств', () => {
   assert.deepEqual(

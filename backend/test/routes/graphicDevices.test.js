@@ -7,7 +7,7 @@ import {
 } from '#features/monitoring/data/config/graphicDevices.config.js';
 
 // id из URL графиков фронтенда: /api/<id>/data
-const FRONTEND_GRAPHIC_IDS = ['example'];
+const FRONTEND_GRAPHIC_IDS = ['station16'];
 
 test('график строится по любому описанному устройству', () => {
   for (const config of Object.values(DEVICE_CONFIGS)) {

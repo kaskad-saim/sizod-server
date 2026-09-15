@@ -1,11 +1,12 @@
 {
   "name": "sizod-backend",
   "version": "1.0.0",
-  "description": "Backend сервера СИЗОД: опрос Modbus-устройств, MongoDB, SSO с главным сервером",
+  "description": "Backend сервера СИЗОД: опрос ПЛК по OPC UA, MongoDB, SSO с главным сервером",
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
+    "opcua:check": "node scripts/checkOpcUaDevices.js",
     "format": "prettier --ignore-path ../.prettierignore --write .",
     "format:check": "prettier --ignore-path ../.prettierignore --check .",
     "test": "node --test"
@@ -14,13 +15,12 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@sorbent/platform-kit": "github:kaskad-saim/platform-kit#semver:^0.3.0",
+    "@sorbent/platform-kit": "github:kaskad-saim/platform-kit#semver:^0.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "modbus-serial": "^8.0.25",
     "mongoose": "^8.9.4",
-    "serialport": "^13.0.0",
+    "node-opcua": "^2.183.1",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
   },
